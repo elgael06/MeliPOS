@@ -55,6 +55,7 @@ class AsignacionView(APIView):
     def consultarTickets(self, folio):
         t = Ticket.objects.filter(folio_asignacion=folio)
         total = 0
+        vouchers = 0
         data = []
         if (t.exists()):
             for tiket in t:
@@ -70,10 +71,13 @@ class AsignacionView(APIView):
                     'estatus': estatusTicket(tiket.estatus),
                     'formato': tiket.disenioTicket
                 })
+                if (tiket.tipo_pago == "TA"):
+                    vouchers += tiket.total
                 total += tiket.total
         return {
             'lista': data,
-            'total': total
+            'total': total,
+            'vouchers': vouchers
         }
 
 

@@ -33,7 +33,7 @@
           </div>
           <div class="col-sm-2 bg-info">
             <label>Total</label>
-            <input type="number" disabled class="form-control" v-model="monedas.total">
+            <input type="number" disabled class="form-control" v-model="tmonedas">
           </div>
           <!-- Billetes-->
           <div class="col-sm-12">
@@ -61,7 +61,7 @@
           </div>
           <div class="col-sm-2 bg-info">
             <label>Total</label>
-            <input type="number" disabled class="form-control" v-model="billetes.total">
+            <input type="number" disabled class="form-control" v-model="tbilletes">
           </div>
           <!-- Otros-->
           <div class="col-sm-12">
@@ -69,7 +69,7 @@
           </div>
           <div class="col-sm-2">
             <label>Bouchers</label>
-            <input type="number" class="form-control" v-model="otros.vouchers">
+            <input type="number" disabled class="form-control" v-model="seleccion.tickets.vouchers">
           </div>
           <div class="col-sm-2">
             <label>Retiros</label>
@@ -77,7 +77,7 @@
           </div>
           <div class="col-sm-2">
             <label>Total Otros</label>
-            <input type="number" disabled class="form-control" v-model="otros.total">
+            <input type="number" disabled class="form-control" v-model="totros">
           </div>
           <div class="col-sm-2">
             <label>Total Tickets</label>
@@ -85,20 +85,20 @@
           </div>
           <div class="col-sm-2">
             <label>Total</label>
-            <input type="number" disabled class="form-control" v-model="otros.total">
+            <input type="number" disabled class="form-control" v-model="totros">
           </div>
           <div class="col-sm-2 bg-info">
             <label>Total Corte</label>
-            <input type="number" disabled class="form-control" v-model="otros.total">
+            <input type="number" disabled class="form-control" v-model="tcortes">
           </div>
-          <div class="col-sm-4 mt-1">
-            <i class="btn btn-info fa fa-save btn-block">Guardar Corte</i>
+          <div class="col-sm-4 mt-3">
+            <i class="btn btn-success fa fa-save btn-block">Guardar Corte</i>
           </div>
-          <div class="col-sm-4 mt-1">
-            <i class="btn btn-danger fa fa-save btn-block">Cancelar Corte</i>
+          <div class="col-sm-4 mt-3">
+            <i class="btn btn-warning fa fa-trash btn-block" @click="cancelar">Cancelar Corte</i>
           </div>
-          <div class="col-sm-4 mt-1">
-            <i class="btn btn-default fa fa-save btn-block">Cerrar</i>
+          <div class="col-sm-4 mt-3">
+            <i class="btn btn-danger fa fa-close btn-block" @click="cerrar">Cerrar</i>
           </div>
         </div>
       </div>
@@ -136,7 +136,69 @@ export default {
   },
   methods: {
     cerrar() {
+      console.log("Cerrar...");
       document.querySelector("#vista_cortes").style.display = "none";
+      this.cancelar();
+    },
+    cancelar() {
+      console.log("Cerrar...");
+      this.monedas = {
+        centavos50: 0,
+        peso: 0,
+        dos: 0,
+        cinco: 0,
+        diez: 0,
+        total: 0
+      };
+      this.billetes = {
+        veinte: 0,
+        cincuenta: 0,
+        cien: 0,
+        docientos: 0,
+        quinientos: 0,
+        total: 0
+      };
+      this.otros = {
+        vouchers: 0,
+        retiros: 0,
+        total: 0
+      };
+    },
+    valorDinero(m, cant) {
+      return parseFloat(m) > 0 ? parseFloat(m) * cant || 0 : 0;
+    }
+  },
+  computed: {
+    tmonedas() {
+      let { centavos50, peso, dos, cinco, diez } = this.monedas;
+      return (
+        this.valorDinero(centavos50, 0.5) +
+        this.valorDinero(peso, 1) +
+        this.valorDinero(dos, 2) +
+        this.valorDinero(cinco, 5) +
+        this.valorDinero(diez, 10)
+      );
+    },
+    tbilletes() {
+      let { veinte, cincuenta, cien, docientos, quinientos } = this.billetes;
+      return (
+        this.valorDinero(veinte, 20) +
+        this.valorDinero(cincuenta, 50) +
+        this.valorDinero(cien, 100) +
+        this.valorDinero(docientos, 200) +
+        this.valorDinero(quinientos, 500)
+      );
+    },
+    totros() {
+      let { retiros } = this.otros;
+      return parseFloat(retiros || 0) + this.seleccion.tickets.vouchers;
+    },
+    total() {
+      let { retiros } = this.otros;
+      return this.seleccion.tickets.total - parseFloat(retiros || 0);
+    },
+    tcortes() {
+      return this.tmonedas + this.tbilletes + this.total;
     }
   }
 };
