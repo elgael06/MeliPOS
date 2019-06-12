@@ -1,0 +1,103 @@
+/**modal**/
+.modal_base {
+    display: none;
+    position: fixed;
+    border-radius: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 9997;
+    background: #9296998a;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_base>div {
+    width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+#modal_load {
+    z-index: 9999;
+    background: #f7f7f8c2;
+    color: #3e4044
+}
+
+thead {
+    display: normal;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    z-index: 990;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 990;
+}
+
+/*Add Rotation Animation*/
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(900deg)
+    }
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(900deg)
+    }
+}
+
+/*Rotation Animation*/
+.rotate {
+    -webkit-animation: 2s rotate linear infinite;
+    animation: 2s rotate linear infinite;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    margin-right: 10px;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(.2)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(.2)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/*efecto botones*/
+.btn {
+    margin-left: 1px;
+    margin-right: 1px;
+}

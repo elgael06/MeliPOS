@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+    {% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-7">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'src/lib/font/css/font-awesome.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}My Sistema {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'src/lib/bootstrap/bootstrap.min.css' %}">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'src/lib/custom.css' %}">-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}"/>
+
+    
+    <script type="text/javascript" src="{% static 'src/lib/vue/vue_.js'%}" ></script>
+    <script type="text/javascript" src="{% static 'src/lib/modernizr-2.8.3.js'%}" ></script>
+   <!--  <script type="text/javascript" src="{% static 'src/lib/React/react-dom.production.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'src/lib/React/react.production.min.js' %}" ></script>-->
+</head>
+<body>
+
+<div class="modal_base" id="modal_load" style="font-size:35px;z-index:9999">
+  <i class="fa fa-circle-o-notch rotate"></i>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+  <div class="container-fluid">
+    <div class="navbar-header" >
+      <button style="color:#FFF" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" style="color:#FFF;font-size: 18px;" href="/">
+        <i class="fa fa-shopping-cart" style="font-size: 25px"></i> MyEcomer</a>
+    </div>
+    {% if request.session.id_usuario > 0 %}
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="menu {% if request.path  == '/'  %}active{% else%} {% endif %}">
+          <a class="fa fa-home" style="color:#FFF" href="/"> Inicio</a>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle fa fa-briefcase" data-toggle="dropdown"  style="color:#FFF"> Administracion <span class="caret"></span>
+          </a>
+            <ul class="dropdown-menu">
+              <li class="{% if request.path  == '/usuarios/'  %}active{% else%} {% endif %}">
+                <a class="fa fa-users" href="/usuarios"> Usuarios</a>
+              </li>
+              <li class="{% if request.path  == '/Compras/proveedores/'  %}active{% else%} {% endif %}">
+                <a class="fa fa-chain" href="/Compras/proveedores"> Proveedores</a>
+              </li>
+            </ul>
+        </li>   
+        <li class="dropdown">
+            <a class="fa fa-cart-arrow-down dropdown-toggle" data-toggle="dropdown"  style="color:#FFF">
+              Comercio 
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li class="{% if request.path  == '/Compras/'  %}active{% else%} {% endif %}">
+                    <a class="fa fa-shopping-basket" href="/Compras"> Compras</a>
+                  </li>
+                <li class="{% if request.path  == '/Ventas/'  %}active{% else%} {% endif %}">
+                  <a class="fa fa-laptop" href="/Ventas"> Ventas</a>
+                </li>
+                <li class="{% if request.path  == '/Productos/'  %}active{% else%} {% endif %}">
+                  <a class="fa fa-cubes" href="/Productos"> Productos</a>
+                </li>
+                <li class="{% if request.path  == '/Inventario/'  %}active{% else%} {% endif %}">
+                  <a class="fa fa-truck" href="/Inventario"> Inventario</a>
+                </li>
+              </ul>
+        </li>  
+        <li class="{% if request.path  == '/usuarios/about'  %}active{% else%} {% endif %}">
+          <a class="fa fa-info-circle" href="/usuarios/about"  style="color:#FFF"> Acerca</a>
+        </li>   
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a style="color:#FFF" class="fa fa-user">   {{request.session.usuario}}</a></li>
+          <li class="{% if request.path  == '/usuarios/login/'  %}active{% else%} {% endif %}">
+            <a style="color:#FFF;background: red" href="/usuarios/login">
+              <i class="fa fa-sign-out"> Salir</i>.
+            </a>
+        </li>
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container" id="contenedor" style="margin-top:90px" 
+style="background: #9fabb6;min-height: 94%">
+    {% block content %}
+      Aqui Va El Contenido...
+    {% endblock %}
+</div>
+<footer style="float: right;padding: 20px">
+  By elgael06
+</footer>
+
+<script type="text/javascript" src="{% static 'src/lib/JQuery/jquery-3.4.1.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'src/lib/bootstrap/bootstrap.js' %}" ></script>
+</body>
+<link rel="stylesheet" type="text/css" href="{% static 'src/css/main.css' %}?1.0.0"/>
+<style>
+ 
+</style>
+</html>

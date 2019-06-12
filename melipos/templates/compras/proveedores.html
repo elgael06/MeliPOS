@@ -1,0 +1,28 @@
+
+{% extends "inicio.html" %}
+{% load staticfiles %}
+{% load static %}
+{% block title %}
+     Proveedores
+{% endblock %}
+
+{% block content %} 
+<link rel="stylesheet" type="text/css" href="{% static 'src/css/compras/proveedor.css' %}">
+<div class="card" id="root">
+     <div class="card-header">
+          <label>Proveedores.</label>
+          <div style="float:right;width:100px">
+               <i class="btn btn-success" @click="on_nuevo"> <i class="fa fa-plus" ></i></i>
+          </div>
+     </div>
+      <div class="card-body" style="height:410px">
+          <lista-proveedores v-bind:items="lista_proveedores" v-bind:on_editar="on_editar"  />
+      </div>
+      <modal-proveedor
+          v-bind:proveedor="proveedor"
+          v-bind:guardar="guardar"      
+       />
+</div>
+
+<script type="text/javascript" src="{% static 'src/js/compras/proveedores.js' %}?1.0.1" ></script>
+{% endblock %}

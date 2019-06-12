@@ -1,0 +1,26 @@
+
+
+#modal_producto>div{
+    max-width: 800px;
+}
+#contenedor_btn_modal>i{
+    margin-top: 20px;
+}
+#contenedor_btn_modal .btn-danger{
+    float: right;
+}
+#contenedor_tabla{
+    overflow: auto;
+    border:1px solid rgb(129, 171, 226);
+    border-radius: 10px;
+    height: 370px;
+}
+.chico{
+    width: 100px;
+}
+.centro{
+    text-align: center;
+}
+.numero{
+    text-align: right;
+}

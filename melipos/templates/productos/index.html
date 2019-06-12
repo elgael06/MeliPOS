@@ -1,0 +1,42 @@
+
+{% extends "inicio.html" %}
+{% block title %}
+     Productos
+{% endblock %}
+{% load staticfiles %}
+    {% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'src/css/productos/alta.css' %}?1.0.1"/>
+<div class="card" id="productos">
+     <div class="card-header">
+          <label>Lista Productos :</label> 
+          <i class="fa fa-plus btn btn-success" style="float:right" @click="on_nuevo"> Agregar Nuevo.</i>
+     </div>
+      <div class="card-body" style="height:410px">
+          <div style="overflow: auto;height: 360px;border: 1px rgb(118, 167, 246) solid;border-radius: 10px">
+               <Producto v-bind:productos="productos">
+               </Producto>
+          </div>
+     </div>
+     <moda-alta  
+          v-bind:seleccion="seleccion"
+          v-bind:venta="venta"
+          v-bind:margen="margen"
+          v-bind:on_guardar="on_guardar"
+          v-bind:restablecer_parametros="restablecer_parametros"
+          v-bind:comprovar="comprovar"
+     ></moda-alta>
+
+     <moda-imagenes
+          v-bind:producto="seleccion"
+          v-bind:Obtener="Obtener_imagenes"
+          v-bind:fotos="fotos"
+     > </moda-imagenes>
+     <moda-codigos
+          v-bind:producto="seleccion"
+          v-bind:Obtener="Obtener_codigos"
+          v-bind:codigos="codigos"          
+     ></moda-codigos>
+</div>
+<script src="{% static 'src/js/productos/alta_productos.js' %}?1.0.2"></script>
+{% endblock %}

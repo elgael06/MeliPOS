@@ -1,0 +1,45 @@
+
+{% extends "inicio.html" %}
+{% block title %}Login {% endblock %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'src/css/login.css' %}"/>
+    
+     <div class="panel panel-default"> 
+          <div class="panel-heading">
+                <h1>Iniciar Sesion.</h1>
+          </div>
+          <form class="panel-body" id="contenido">
+               <div class="row">
+                    <div class="col-sm-8">
+                         <div class="form control entradas">
+                              <label>Id Usuario</label>
+                              <input type="text"
+                                   v-model="usuario"
+                                   name="id_usuari_sesion"
+                              class="form-control" name="id" placeholder="Nombre...">
+                              <small id="helpId" class="form-text text-muted">Aqui Se Coloca El Id De Usuario Previamente asignado.</small>
+                         </div>
+                         <div class="form control entradas">
+                              <label>Password</label>
+                              <input type="Password"
+                                   v-model="password"
+                                   name="passw_usuari_sesion"
+                              class="form-control" name="password" placeholder="Password...">
+                              <small id="helpId" class="form-text text-muted">En Caso De Perder La Contraseña Pedir Restauracion A Administrado.</small>
+                         </div>
+                         <button v-on:click="enviar" class="btn btn-primary entradas">
+                              Entrar 
+                              <i class="fa fa-sign-in"></i>
+                         </button>
+                    </div>
+                    <div class="col-sm-4" style="justify-content:center">
+                         <i class="fa fa-shopping-cart" style="font-size:75px"> </i>
+                         <label  style="font-size:35px">  MyEcomer</label>
+                    </div>
+               </div>
+          </form>
+     </div>
+     
+    <script type="text/javascript" src="{% static 'src/js/login/main.js' %}?1.0.1" ></script>
+{% endblock %}

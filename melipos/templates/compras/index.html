@@ -1,0 +1,35 @@
+
+{% extends "inicio.html" %}
+{% block title %}
+     Compras
+{% endblock %}
+{% load staticfiles %}
+    {% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'src/css/compras/orden.css' %}?1.0.0"/>
+<div class="card"  id="root">
+     <div class="card-header  bg-primary text-white">
+          <label>Compras.</label>
+          <div style="float:right">
+               <i class="btn btn-success fa fa-plus" @click="on_nueva"> Nueva Compra</i>
+          </div>
+     </div>
+      <div class="card-body" style="">
+          <div style="overflow:auto;height:410px">
+               <orden-lista v-for="item in lista_ordenes"
+                    v-bind:orden="item"
+                    v-bind:seleccion="on_editar"
+               />          
+          </div>
+      </div>
+      <modal-orden
+          v-bind:orden="orden"
+          v-bind:productos="productos"
+          v-bind:lista_proveedores="lista_proveedores"
+          v-bind:Guardar_orden="Guardar_orden"
+      />
+</div>
+
+<script type="text/javascript" src="{% static 'src/js/compras/orden.js'%}" ></script>
+
+{% endblock %}

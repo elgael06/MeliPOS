@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+    {% load static %}
+<html lang="es">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}MeliPOS {% endblock %}</title>
+  <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'src/lib/font/css/font-awesome.css' %}">
+  <link rel="stylesheet" href="{% static 'require/vendors/mdi/css/materialdesignicons.min.css'%}">
+  <link rel="stylesheet" href="{% static 'require/vendors/base/vendor.bundle.base.css'%}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'require/vendors/datatables.net-bs4/dataTables.bootstrap4.css'%}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'require/css/style.css'%}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'require/images/favicon.png'%}" />
+
+    <script type="text/javascript" src="{% static 'src/lib/vue/vue_.js'%}" ></script>
+    <script type="text/javascript" src="{% static 'src/lib/modernizr-2.8.3.js'%}" ></script>
+</head>
+<body>
+
+<div class="modal_base" id="modal_load" style="font-size:35px;z-index:9999">
+  <i class="fa fa-circle-o-notch rotate"></i>
+</div>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex justify-content-center">
+          <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
+            <a class="navbar-brand brand-logo text-white" href="/">
+            <span class="fa fa-shopping-cart"></span> MeliPOS
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="/">
+               <span class="fa fa-shopping-cart  text-white"></span>
+            </a>
+            <button class="navbar-toggler navbar-toggler align-self-center  text-white" type="button" data-toggle="minimize">
+              <span class="mdi mdi-sort-variant"></span>
+            </button>
+          </div>  
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <ul class="navbar-nav mr-lg-4 w-100">
+          <li class="nav-item nav-search d-none d-lg-block w-100">
+            <div class="input-group">
+              
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown mr-1">
+            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+              <i class="mdi mdi-message-text mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Mensages</p>
+              <a class="dropdown-item">
+            
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mr-4">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="mdi mdi-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
+              <a class="dropdown-item">
+               
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <i class="mb-0 font-weight-normal mdi mdi-account" style="font-size:25px"></i>
+              <span class="nav-profile-name"></span>
+              {{request.session.usuario}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="mdi mdi-settings text-primary"></i>
+                Configuraciones
+              </a>
+              <a class="dropdown-item" href="/usuarios/login">
+                <i class="mdi mdi-logout text-primary" ></i>
+                Salir
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Inicio</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi mdi-bulletin-board menu-icon"></i>
+              <span class="menu-title">Administracion</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> 
+                  <a class="fa fa-users nav-link" href="/usuarios"> Usuarios</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-chain nav-link" href="/Compras/proveedores"> Proveedores</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-money nav-link" href="/Ventas/Asignacion"> Asignacion</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse"href="#ui-conercio" aria-expanded="false" aria-controls="ui-conercio">
+              <i class="mdi mdi mdi mdi-cart-plus menu-icon"></i>
+              <span class="menu-title">Comercio</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-conercio">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> 
+                    <a class="fa fa-shopping-basket nav-link" href="/Compras"> Compras</a>                
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-laptop nav-link" href="/Ventas"> Ventas</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-cubes nav-link" href="/Productos"> Productos</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-truck nav-link" href="/Inventario"> Inventario</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+           <a class="nav-link"   href="/usuarios/about" aria-expanded="false">
+              <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                 <span class="menu-title">Acerca</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+              {% block content %}
+                Aqui Va El Contenido...
+              {% endblock %}
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+               <span class="fa fa-shopping-cart"></span> MeliPOS
+            </span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="{% static 'require/vendors/base/vendor.bundle.base.js'%}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'require/vendors/chart.js/Chart.min.js'%}"></script>
+  <script src="{% static 'require/vendors/datatables.net/jquery.dataTables.js'%}"></script>
+  <script src="{% static 'require/vendors/datatables.net-bs4/dataTables.bootstrap4.js'%}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'require/js/off-canvas.js'%}"></script>
+  <script src="{% static 'require/js/hoverable-collapse.js'%}"></script>
+  <script src="{% static 'require/js/template.js'%}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'require/js/dashboard.js'%}"></script>
+  <script src="{% static 'require/js/data-table.js'%}"></script>
+  <script src="{% static 'require/js/jquery.dataTables.js'%}"></script>
+  <script src="{% static 'require/js/dataTables.bootstrap4.js'%}"></script>
+
+<script type="text/javascript" src="{% static 'src/lib/JQuery/jquery-3.4.1.min.js' %}" ></script>
+  <!-- End custom js for this page-->
+</body>
+<link rel="stylesheet" type="text/css" href="{% static 'src/css/main.css' %}?1.0.0"/>
+<script type="text/javascript">
+  let Usuario = "{{request.session.usuario}}";
+</script>
+</html>
+

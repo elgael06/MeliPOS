@@ -1,0 +1,33 @@
+
+{% extends "inicio.html" %}
+{% load staticfiles %}
+{% load static %}
+{% block title %}
+     Inventario
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'src/css/inventario/inventario.css' %}">
+<div class="card" id="root">
+     <div class="card-header">
+          <div class="row">
+               <h4 class="col-sm-8">Inventario.</h4>
+               <busqueda-producto v-bind:Agregar="Agregar"></busqueda-producto>
+          </div>
+     </div>
+      <div class="card-body" style="height:410px">
+          <div id="contenedor_tabla">
+               <inventario
+                    v-bind:inventario="inventario"
+                    v-bind:Agregar="Agregar"
+               ></inventario>
+          </div>
+      </div>
+      <modal-producto
+          v-bind:producto="seleccion"
+          v-bind:guardar="guardar_producto"
+          v-bind:cancelar="cancelar_producto"
+       ></modal-producto>
+</div>
+<script type="text/javascript" src="{% static 'src/js/inventario/inventario.js' %}" ></script>
+{% endblock %}
