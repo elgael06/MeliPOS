@@ -27,9 +27,13 @@
                 <td>{{item.ticket}}</td>
                 <td>{{item.fecha}}</td>
                 <td>{{item.cantidad}}</td>
-                <td>{{item.descuento}}</td>
+                <td>
+                  <Moneda :cantidad="item.descuento"/>
+                </td>
                 <td>{{item.tipoPago}}</td>
-                <td>{{item.total}}</td>
+                <td>
+                  <Moneda :cantidad="item.total"/>
+                </td>
                 <td>{{item.estatus}}</td>
                 <td>
                   <i class="btn btn-info fa fa-laptop" @click="imprimir(item.formato)">Vista</i>
@@ -45,9 +49,14 @@
 </template>
 
 <script>
+import Moneda from "../../ComponentesGlobales/Moneda";
+
 export default {
   name: "VistaTickets",
   props: ["seleccion"],
+  components: {
+    Moneda
+  },
   methods: {
     cerrar() {
       document.querySelector("#vista_tickets").style.display = "none";

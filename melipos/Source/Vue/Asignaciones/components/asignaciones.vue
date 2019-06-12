@@ -36,16 +36,19 @@
       </div>
     </div>
     <VistaTickets :seleccion="asignacion"/>
+    <VistaCorte :seleccion="asignacion"/>
   </div>
 </template>
 <script>
 import Asignacion from "./Asignacion";
 import VistaTickets from "./VistaTickets";
+import VistaCorte from "./vistaCorte";
 
 export default {
   components: {
     Asignacion,
-    VistaTickets
+    VistaTickets,
+    VistaCorte
   },
   data() {
     return {

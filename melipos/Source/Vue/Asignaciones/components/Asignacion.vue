@@ -27,11 +27,15 @@
         </div>
         <div class="col-sm-3 mt-1">
           <label>Fondo Caja:</label>
-          <i class="form-control">{{asignacion.fondo_caja}}</i>
+          <i class="form-control">
+            <Moneda :cantidad="asignacion.fondo_caja"/>
+          </i>
         </div>
         <div class="col-sm-3 mt-1">
           <label>Venta Caja:</label>
-          <i class="form-control">{{asignacion.tickets.total}}</i>
+          <i class="form-control">
+            <Moneda :cantidad="asignacion.tickets.total"/>
+          </i>
         </div>
         <div class="col-sm-3">
           <i class="btn btn-info btn-block mt-4 fa fa-list" @click="evTicket">Tickets</i>
@@ -45,9 +49,14 @@
 </template>
 
 <script>
+import Moneda from "../../ComponentesGlobales/Moneda";
+
 export default {
   name: "Asignacion",
   props: ["asignacion", "seleccionar"],
+  components: {
+    Moneda
+  },
   methods: {
     evTicket() {
       console.log("tickets", this.asignacion);
@@ -55,8 +64,9 @@ export default {
       document.querySelector("#vista_tickets").style.display = "flex";
     },
     evCorte() {
-      console.log("Corte");
+      console.log("Corte", this.asignacion);
       this.seleccionar(this.asignacion);
+      document.querySelector("#vista_cortes").style.display = "flex";
     }
   },
   computed: {
