@@ -8,18 +8,18 @@
       </div>
       <div class="card-body">
         <p>Lista Tickets</p>
-        <div style="overflow:auto;heigth:400px">
+        <div style="overflow:auto;height:400px">
           <table class="table" v-if="lista">
             <thead>
-              <tr class="warning">
-                <th>ID</th>
-                <th>fecha</th>
-                <th>cantidad</th>
-                <th>Descuento</th>
-                <th>Tipo Pago</th>
-                <th>Total</th>
-                <th>Estatus</th>
-                <th></th>
+              <tr class="bg-primary text-white">
+                <th class="bg-primary text-white">ID</th>
+                <th class="bg-primary text-white">fecha</th>
+                <th class="bg-primary text-white">cantidad</th>
+                <th class="bg-primary text-white">Descuento</th>
+                <th class="bg-primary text-white">Tipo Pago</th>
+                <th class="bg-primary text-white">Total</th>
+                <th class="bg-primary text-white">Estatus</th>
+                <th class="bg-primary text-white"></th>
               </tr>
             </thead>
             <tbody v-for="item in seleccion.tickets.lista" :key="item.ticket">

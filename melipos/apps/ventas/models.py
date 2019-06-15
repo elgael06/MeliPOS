@@ -42,7 +42,8 @@ class Ticket(models.Model):
     fecha = models.DateField(auto_now_add=True)
     hora = models.DateTimeField(auto_now_add=True)
     tipo_pago = models.CharField(max_length=2)
-    disenioTicket = models.CharField(max_length=20000,default="<h1>Sin Datos</h1>")
+    disenioTicket = models.CharField(
+        max_length=20000, default="<h1>Sin Datos</h1>")
 
 
 class Producto_ticket(models.Model):
@@ -56,7 +57,7 @@ class Producto_ticket(models.Model):
 class Asignacion_caja_corte(models.Model):
     folio_asignacion = models.IntegerField()
     efectivo = models.FloatField()
-    cheques = models.FloatField()
+    retiros = models.FloatField()
     vouchers = models.FloatField()
     total = models.FloatField()
     total_corte = models.FloatField()

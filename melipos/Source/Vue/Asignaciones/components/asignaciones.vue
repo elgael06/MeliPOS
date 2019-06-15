@@ -36,7 +36,7 @@
       </div>
     </div>
     <VistaTickets :seleccion="asignacion"/>
-    <VistaCorte :seleccion="asignacion"/>
+    <VistaCorte :seleccion="asignacion" :guardarCorte="guardarCorte"/>
   </div>
 </template>
 <script>
@@ -100,6 +100,39 @@ export default {
               this.listaAsignacion = res.lista;
             })
             .catch(e => alert("Error En Formato JSON !!!"));
+        });
+    },
+    guardarCorte(datos) {
+      document.querySelector("#modal_load").style.display = "flex";
+      fetch(`/Ventas/Asignacion/api`, {
+        method: "post",
+        body: JSON.stringify(datos),
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .catch(e => {
+          document.querySelector("#modal_load").style.display = "none";
+          alert("Error De Conexion !!");
+        })
+        .then(e => {
+          e.json()
+            .then(res => {
+              document.querySelector("#modal_load").style.display = "none";
+              if (res.estatus > 0) {
+                alert(`Corte #${res.estatus} \n Guardado....`);
+                this.obtenerAsignacionPorFecha();
+              } else
+                alert(
+                  "Error a Guardar Corte Puede Que Este Folio Ya Se Encuentre Guardado O No Este Vigente.."
+                );
+              document.querySelector("#vista_cortes").style.display = "none";
+            })
+            .catch(e => {
+              document.querySelector("#modal_load").style.display = "none";
+              alert("Error En Formato JSON !!!");
+            });
         });
     }
   }

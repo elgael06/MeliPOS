@@ -3,108 +3,22 @@
     <div class="card">
       <div class="card-header">
         <i class="fa fa-close close" @click="cerrar"></i>
-        <label>Ticket Asignacion {{seleccion.id || 0}}</label>
+        <label>Asignacion {{seleccion.id || 0}}</label>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="overflow:auto;max-height:500px">
+        <!-- Monedas-->
+        <EntradaMoneda :monedas="monedas" :tmonedas="tmonedas"/>
+        <!-- Billetes-->
+        <EntradaBilletes :billetes="billetes" :tbilletes="tbilletes"/>
+        <!-- Otros-->
+        <EntradaOtros
+          :tcortes="tcortes"
+          :diferencia="diferencia"
+          :totros="totros"
+          :otros="otros"
+          :seleccion="seleccion"
+        />
         <div class="row">
-          <!-- Monedas-->
-          <div class="col-sm-12">
-            <label>Monedas</label>
-          </div>
-          <div class="col-sm-2">
-            <label>50 Cent</label>
-            <input type="number" class="form-control" v-model="monedas.centavos50">
-          </div>
-          <div class="col-sm-2">
-            <label>1 peso</label>
-            <input type="number" class="form-control" v-model="monedas.peso">
-          </div>
-          <div class="col-sm-2">
-            <label>2 peso</label>
-            <input type="number" class="form-control" v-model="monedas.dos">
-          </div>
-          <div class="col-sm-2">
-            <label>5 peso</label>
-            <input type="number" class="form-control" v-model="monedas.cinco">
-          </div>
-          <div class="col-sm-2">
-            <label>10 peso</label>
-            <input type="number" class="form-control" v-model="monedas.diez">
-          </div>
-          <div class="col-sm-2 bg-info">
-            <label>Total</label>
-            <i class="form-control">
-              <Moneda :cantidad="tmonedas"/>
-            </i>
-          </div>
-          <!-- Billetes-->
-          <div class="col-sm-12">
-            <label>Billetes</label>
-          </div>
-          <div class="col-sm-2">
-            <label>$20</label>
-            <input type="number" class="form-control" v-model="billetes.veinte">
-          </div>
-          <div class="col-sm-2">
-            <label>$50</label>
-            <input type="number" class="form-control" v-model="billetes.cincuenta">
-          </div>
-          <div class="col-sm-2">
-            <label>$100</label>
-            <input type="number" class="form-control" v-model="billetes.cien">
-          </div>
-          <div class="col-sm-2">
-            <label>$200</label>
-            <input type="number" class="form-control" v-model="billetes.docientos">
-          </div>
-          <div class="col-sm-2">
-            <label>$500</label>
-            <input type="number" class="form-control" v-model="billetes.quinientos">
-          </div>
-          <div class="col-sm-2 bg-info">
-            <label>Total</label>
-            <i class="form-control">
-              <Moneda :cantidad="tbilletes"/>
-            </i>
-          </div>
-          <!-- Otros-->
-          <div class="col-sm-12">
-            <label>Otros</label>
-          </div>
-          <div class="col-sm-2">
-            <label>Vouchers</label>
-            <i class="form-control">
-              <Moneda :cantidad="seleccion.tickets.vouchers"/>
-            </i>
-          </div>
-          <div class="col-sm-2">
-            <label>Retiros</label>
-            <input type="number" class="form-control" v-model="otros.retiros">
-          </div>
-          <div class="col-sm-2">
-            <label>Total Otros</label>
-            <i class="form-control">
-              <Moneda :cantidad="totros"/>
-            </i>
-          </div>
-          <div class="col-sm-2">
-            <label>Total Tickets</label>
-            <i class="form-control">
-              <Moneda :cantidad="seleccion.tickets.total"/>
-            </i>
-          </div>
-          <div class="col-sm-2">
-            <label>Diferencia</label>
-            <i class="form-control">
-              <Moneda :cantidad="diferencia"/>
-            </i>
-          </div>
-          <div class="col-sm-2 bg-info">
-            <label>Total Corte</label>
-            <i class="form-control">
-              <Moneda :cantidad="tcortes"/>
-            </i>
-          </div>
           <div class="col-sm-4 mt-3">
             <i class="btn btn-success fa fa-save btn-block" @click="guardar">Guardar Corte</i>
           </div>
@@ -121,11 +35,17 @@
 </template>
 <script>
 import Moneda from "../../ComponentesGlobales/Moneda";
+import EntradaMoneda from "./EntradaMoneda";
+import EntradaBilletes from "./EntradaBilletes";
+import EntradaOtros from "./EntradaOtros";
 export default {
   name: "VistaCorte",
-  props: ["seleccion"],
+  props: ["seleccion", "guardarCorte"],
   components: {
-    Moneda
+    Moneda,
+    EntradaMoneda,
+    EntradaBilletes,
+    EntradaOtros
   },
   data() {
     return {
@@ -188,13 +108,17 @@ export default {
     guardar() {
       console.log("Guardar...");
       let datos = {
-        vouchers: this.redondeo_cantidad(this.seleccion.tickets.vouchers),
+        folio: this.seleccion.id,
+        efectivo: this.tmonedas + this.tbilletes,
         retiros: this.redondeo_cantidad(this.otros.retiros),
-        tickets: this.redondeo_cantidad(this.seleccion.tickets.total),
+        vouchers: this.redondeo_cantidad(this.seleccion.tickets.vouchers),
+        total: this.redondeo_cantidad(this.seleccion.tickets.total),
+        total_corte: this.redondeo_cantidad(this.tcortes),
         diferencia: this.redondeo_cantidad(this.diferencia),
-        corte: this.redondeo_cantidad(this.tcortes)
+        fondo: this.seleccion.fondo_caja
       };
       console.log("datos", datos);
+      this.guardarCorte(datos);
     },
     redondeo_cantidad(numero) {
       return Math.round(numero * 100) / 100;
@@ -223,13 +147,19 @@ export default {
     },
     totros() {
       let { retiros } = this.otros;
-      return parseFloat(retiros || 0) + this.seleccion.tickets.vouchers;
+      return this.seleccion.fondo_caja;
     },
     diferencia() {
       return this.tcortes - this.seleccion.tickets.total;
     },
     tcortes() {
-      return this.totros + this.tmonedas + this.tbilletes;
+      return (
+        this.tmonedas +
+        this.tbilletes +
+        this.seleccion.tickets.vouchers +
+        parseFloat(this.otros.retiros || 0) -
+        this.seleccion.fondo_caja
+      );
     }
   }
 };
