@@ -245,7 +245,7 @@ class TicketView(APIView):
 
     def verificarAsignacion(self, id_usuario):
         asignacion = Asignacion_caja.objects.filter(
-            id_usuario=id_usuario)
+            id_usuario=id_usuario,estatus="V")
         if(asignacion.exists()):
             asignacion.update(fecha=fecha_hoy())
             return asignacion[0]
