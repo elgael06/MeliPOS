@@ -23241,14 +23241,15 @@ dl li {
 }
 
 .sidebar .nav .nav-item.active>.nav-link {
-    background: initial;
     position: relative;
+    font-size: 16px;
 }
 
 .sidebar .nav .nav-item.active>.nav-link i,
 .sidebar .nav .nav-item.active>.nav-link .menu-title,
 .sidebar .nav .nav-item.active>.nav-link .menu-arrow {
-    color: #4d83ff;
+    color: #cfcfcf;
+    font-size: 18px;
 }
 
 .sidebar .nav:not(.sub-menu) {
@@ -23265,8 +23266,8 @@ dl li {
 }
 
 .sidebar .nav:not(.sub-menu)>.nav-item:hover>.nav-link {
-    background: transparent;
-    color: #4d83ff;
+    background: #278f5e;
+    color: #f1f1f1;
 }
 
 .sidebar .nav.sub-menu {
@@ -23291,7 +23292,7 @@ dl li {
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link {
-    color: #656565;
+    color: #10744a;
     padding: 0.6rem 1rem;
     position: relative;
     font-size: 0.875rem;
@@ -23306,7 +23307,7 @@ dl li {
 
 .sidebar .nav.sub-menu .nav-item .nav-link.active {
     color: #000;
-    background: transparent;
+    background: #56d19e
 }
 
 .sidebar .nav.sub-menu .nav-item:hover {
@@ -23343,14 +23344,14 @@ dl li {
 
 .navbar .navbar-brand-wrapper {
     background: #4d8cec;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid #40afaa;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
     width: 257px;
     height: 60px;
-    border-right: 1px solid #e3e3e3;
+    border-right: 1px solid #2fac82;
     color: #FFF
 }
 
@@ -23874,6 +23875,8 @@ dl li {
     .sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link {
         text-align: left;
         padding-left: 20px;
+        ,
+        background: #ffffff
     }
 
     .sidebar-icon-only .main-panel {

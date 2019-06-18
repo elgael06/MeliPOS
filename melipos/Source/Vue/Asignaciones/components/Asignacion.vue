@@ -97,11 +97,12 @@ export default {
             })
             .catch(e => {
               document.querySelector("#modal_load").style.display = "none";
-              alert("Error En Formato JSON !!!");
+              alert("Error En Formato Ticket !!!");
             });
         });
     },
     imprimir(res) {
+      console.log("asignacion=>", this.asignacion);
       var printWin = window.open(
         "",
         "Ticket",
@@ -162,6 +163,13 @@ export default {
 			<div>
 				<label>Diferencia </label>
 				<span  style="float:right">${this.redondeo_cantidad(res.diferencia)}</span>
+			</div>
+			
+			<div>
+				<label>Fondo Caja </label>
+				<span  style="float:right">${this.redondeo_cantidad(
+          this.asignacion.fondo_caja * -1
+        )}</span>
 			</div>
 			<div>
 				<label>Total Corte</label>

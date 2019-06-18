@@ -26,6 +26,42 @@ def asignacion(request):
 # api Asignacion
 
 
+class NuevaAsignacion(APIView):
+
+    def post(self, request):
+        data = {'id': 0, 'fondo': 0}
+        creo = request.session["id_usuario"]
+        cajero = Usuario.objects.filter(id=request.data.get("id_usuario"))
+        if cajero.exists():
+            asig = self.verificarAsignacion(
+                id_usuario=request.data.get("id_usuario"),
+                id_creo=creo,
+                fondo=request.data.get("fondo"),
+            )
+            data = {'id': asig.id, 'fondo': asig.fondo_caja}
+
+        return JsonResponse(data)
+
+    def verificarAsignacion(self, id_usuario, id_creo, fondo):
+        asignacion = Asignacion_caja.objects.filter(
+            id_usuario=id_usuario, estatus="V")
+        if(asignacion.exists()):
+            asignacion.update(fecha=fecha_hoy(),
+                              usuario_modifico=id_creo, fondo_caja=fondo)
+            return asignacion[0]
+        else:
+            asignacion = Asignacion_caja(
+                id_usuario=id_usuario,
+                fondo_caja=fondo,
+                usuario_creo=id_creo,
+                usuario_modifico=id_creo,
+                estatus="V",
+                fecha=fecha_hoy(),
+                fecha_modificacion=fecha_hoy())
+            asignacion.save()
+            return asignacion
+
+
 class AsignacionView(APIView):
     def get(self, request):
         data = []

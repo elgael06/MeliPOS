@@ -32,7 +32,7 @@
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="navbar-brand-wrapper d-flex justify-content-center">
+        <div class="navbar-brand-wrapper d-flex justify-content-center" style="background:#318042">
           <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
             <a class="navbar-brand brand-logo text-white" href="/">
             <span class="fa fa-shopping-cart"></span> MeliPOS
@@ -45,7 +45,7 @@
             </button>
           </div>  
         </div>
-        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end"  style="background:#318042">
         <ul class="navbar-nav mr-lg-4 w-100">
           <li class="nav-item nav-search d-none d-lg-block w-100">
             <div class="input-group">
@@ -54,30 +54,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Mensages</p>
-              <a class="dropdown-item">
-            
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown mr-4">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
-              <a class="dropdown-item">
-               
-              </a>
-            </div>
-          </li>
+         
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <i class="mb-0 font-weight-normal mdi mdi-account" style="font-size:25px"></i>
@@ -104,7 +81,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar"  style="background:#d1d4d2">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="/">
@@ -148,6 +125,29 @@
                 </li>
                 <li class="nav-item"> 
                   <a class="fa fa-cubes nav-link" href="/Productos"> Productos</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-truck nav-link" href="/Inventario"> Inventario</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+                <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse"href="#ui-monitores" aria-expanded="false" aria-controls="ui-monitores">
+              <i class="mdi mdi mdi mdi-cart-plus menu-icon"></i>
+              <span class="menu-title">Monitores</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-monitores">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> 
+                    <a class="fa fa-shopping-basket nav-link" href="/Compras"> Compras</a>                
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-laptop nav-link" href="/Ventas"> Ventas Productos</a>
+                </li>
+                <li class="nav-item"> 
+                  <a class="fa fa-cubes nav-link" href="/Productos">Inventario Productos</a>
                 </li>
                 <li class="nav-item"> 
                   <a class="fa fa-truck nav-link" href="/Inventario"> Inventario</a>

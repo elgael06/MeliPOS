@@ -16,11 +16,14 @@
             <option value="F">Finalizado</option>
           </select>
         </div>
-        <div class="col-sm-4 mt-4">
+        <div class="col-sm-2 mt-4">
           <i
             class="btn btn-success btn-block fa fa-download"
             @click="obtenerAsignacionPorFecha"
-          >Cargar</i>
+          >Consultar</i>
+        </div>
+        <div class="col-sm-2 mt-4">
+          <i class="btn btn-primary btn-block fa fa-book" @click="CrearAsignacion">Nueva</i>
         </div>
       </div>
     </div>
@@ -37,18 +40,21 @@
     </div>
     <VistaTickets :seleccion="asignacion"/>
     <VistaCorte :seleccion="asignacion" :guardarCorte="guardarCorte"/>
+    <AltaAsignacion :obtenerAsignacionPorFecha="obtenerAsignacionPorFecha"/>
   </div>
 </template>
 <script>
 import Asignacion from "./Asignacion";
 import VistaTickets from "./VistaTickets";
 import VistaCorte from "./vistaCorte";
+import AltaAsignacion from "./AltaAsignacion";
 
 export default {
   components: {
     Asignacion,
     VistaTickets,
-    VistaCorte
+    VistaCorte,
+    AltaAsignacion
   },
   data() {
     return {
@@ -76,6 +82,10 @@ export default {
   methods: {
     seleccionar(seleccion) {
       this.asignacion = seleccion;
+    },
+    CrearAsignacion() {
+      console.log("Nueva Asignacion...");
+      document.querySelector("#vista_asignacion").style.display = "flex";
     },
     eliminarLista() {
       this.listaAsignacion = [];
