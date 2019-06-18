@@ -23243,6 +23243,8 @@ dl li {
 .sidebar .nav .nav-item.active>.nav-link {
     position: relative;
     font-size: 16px;
+    background: #3d9f56;
+    color: #ffffff
 }
 
 .sidebar .nav .nav-item.active>.nav-link i,
