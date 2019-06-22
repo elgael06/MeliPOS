@@ -1,10 +1,30 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = [
   {
+    entry: "./src/js/React/prueba.js",
+    output: {
+      path: __dirname + "/dist/prueba",
+      filename: "bundle.js"
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
+        }
+      ]
+    },
+    resolve: {
+      extensions: ["*", ".js", ".vue", ".jsx", ".json"]
+    }
+  },
+  {
     //Ventas
-    entry: "./Source/Vue/Ventas/ventas.js",
+    entry: "./src/js/Vue/Ventas/ventas.js",
     output: {
       path: __dirname + "/files/static/dist/ventas",
       filename: "bundle.js"
@@ -34,7 +54,7 @@ module.exports = [
   },
   {
     //asignaciones
-    entry: "./Source/Vue/Asignaciones/asignaciones.js",
+    entry: "./src/js/Vue/Asignaciones/asignaciones.js",
     output: {
       path: __dirname + "/files/static/dist/asignaciones",
       filename: "bundle.js"
