@@ -81,5 +81,26 @@ module.exports = [
       extensions: ["*", ".js", ".vue", ".json"]
     },
     plugins: [new VueLoaderPlugin()]
-  }
+  },
+  {
+    entry: "./src/js/React/Compras/Monitor.js",
+    output: {
+      path: __dirname + "/files/static/dist/Compras/monitor",
+      filename: "bundle.js"
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
+        }
+      ]
+    },
+    resolve: {
+      extensions: ["*", ".js", ".vue", ".jsx", ".json"]
+    }
+  },
 ];

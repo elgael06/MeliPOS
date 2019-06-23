@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from datetime import date,timedelta
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import JsonResponse
@@ -21,6 +22,9 @@ def index(request):
 
 def proveedores(request):
     return acceso(request, 'compras/proveedores.html', {}) 
+
+def monitor(request):
+    return acceso(request, 'compras/monitor.html', {}) 
 
 # Api
 class ProveedorView(APIView):
@@ -132,6 +136,52 @@ class ProveedorView(APIView):
             usuario_modifico=usuario,
         )
 
+class MoniorOrden(APIView):
+    def get(self, request):
+        inicio = request.GET.get("inicio")
+        fin = request.GET.get("fin")
+        total =0
+        data = self.Obtener_orden(f1=inicio,f2=fin)
+        for t in data:
+            total = total+t["Total"]
+
+        return JsonResponse({"ordenes":data,"Total":total})
+
+    def Obtener_orden(self,f1,f2):
+        data =[]
+        ord = Orden.objects.filter(fecha__range=[f1, f2],estatus="F")
+        for dato in ord:
+            prov = Proveedor.objects.filter(id= dato.Folio_proveedor)
+            prod_in = Productos_orden.objects.filter(folio_orden = dato.id)
+
+            productos =[]
+            for prod in prod_in:
+                p = Producto.objects.filter(id=prod.folio_producto)
+                productos.append({
+                    'id':p[0].id,
+                    'descripcion':p[0].descripcion,
+                    'costo':prod.costo,
+                    'venta':prod.venta,
+                    'iva':prod.iva,
+                    'margen':prod.margen,
+                    'cantidad':prod.Cantidad,
+                    'total':prod.Total,
+                })
+            data.append({
+                'id':dato.id,
+                'Folio_proveedor':dato.Folio_proveedor,
+                'proveedor':prov[0].Nombre,
+                'productos':dato.productos,
+                'Total':dato.Total,
+                'Descripcion':dato.Descripcion,
+                'estatus':dato.estatus,
+                'fecha':dato.fecha,
+                'fecha_modificacion':dato.fecha_modificacion,
+                'usuario_creo':dato.usuario_creo,
+                'usuario_modifico':dato.usuario_modifico,
+                'Productos_lista':productos
+            })
+        return data
 
 class OrdenView(APIView):
     def get(self, request):
@@ -178,7 +228,7 @@ class OrdenView(APIView):
         ord = Orden.objects.filter(id=id)
         if ord.exists():
             prov = Proveedor.objects.filter(id= ord[0].Folio_proveedor)
-            prod_in = Productos_orden.objects.filter(folio_producto = id)
+            prod_in = Productos_orden.objects.filter(folio_orden = id)
             productos =[]
             for prod in prod_in:
                 p = Producto.objects.filter(id=prod.folio_producto)

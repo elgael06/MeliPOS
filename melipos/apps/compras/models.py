@@ -14,8 +14,8 @@ class Proveedor(models.Model):
     Representante =  models.CharField(max_length=100)
     Descripcion =  models.CharField(max_length=100,default="NA")
     estatus = models.CharField(max_length=1,default='V')
-    fecha = models.DateField(auto_now_add=True)
-    fecha_modificacion = models.DateField(auto_now=True)
+    fecha = models.DateField(auto_now_add=False)
+    fecha_modificacion = models.DateField(auto_now=False)
     usuario_creo = models.IntegerField()
     usuario_modifico = models.IntegerField() 
 
