@@ -149,7 +149,7 @@ class MoniorOrden(APIView):
 
     def Obtener_orden(self,f1,f2):
         data =[]
-        ord = Orden.objects.filter(fecha__range=[f1, f2],estatus="F")
+        ord = Orden.objects.filter(fecha__range=[f1, f2])
         for dato in ord:
             prov = Proveedor.objects.filter(id= dato.Folio_proveedor)
             prod_in = Productos_orden.objects.filter(folio_orden = dato.id)

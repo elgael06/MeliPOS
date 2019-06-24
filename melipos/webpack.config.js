@@ -103,4 +103,25 @@ module.exports = [
       extensions: ["*", ".js", ".vue", ".jsx", ".json"]
     }
   },
+  {
+    entry: "./src/js/React/Tienda/App",
+    output: {
+      path: __dirname + "/files/static/dist/Tienda",
+      filename: "index.js"
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
+        }
+      ]
+    },
+    resolve: {
+      extensions: ["*", ".js", ".vue", ".jsx", ".json"]
+    }
+  },
 ];
