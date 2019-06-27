@@ -4,7 +4,7 @@ module.exports = [
   {
     entry: "./src/js/React/prueba.js",
     output: {
-      path: __dirname + "/dist/prueba",
+      path: __dirname + "/src/js/prueba",
       filename: "bundle.js"
     },
     module: {
@@ -26,7 +26,7 @@ module.exports = [
     //Ventas
     entry: "./src/js/Vue/Ventas/ventas.js",
     output: {
-      path: __dirname + "/files/static/dist/ventas",
+      path: __dirname + "/files/static/src/js/ventas",
       filename: "bundle.js"
     },
     module: {
@@ -56,7 +56,7 @@ module.exports = [
     //asignaciones
     entry: "./src/js/Vue/Asignaciones/asignaciones.js",
     output: {
-      path: __dirname + "/files/static/dist/asignaciones",
+      path: __dirname + "/files/static/src/js/asignaciones",
       filename: "bundle.js"
     },
     module: {
@@ -85,7 +85,7 @@ module.exports = [
   {
     entry: "./src/js/React/Compras/Monitor.js",
     output: {
-      path: __dirname + "/files/static/dist/Compras/monitor",
+      path: __dirname + "/files/static/src/js/compras/monitor",
       filename: "bundle.js"
     },
     module: {
@@ -102,26 +102,5 @@ module.exports = [
     resolve: {
       extensions: ["*", ".js", ".vue", ".jsx", ".json"]
     }
-  },
-  {
-    entry: "./src/js/React/Tienda/App",
-    output: {
-      path: __dirname + "/files/static/dist/Tienda",
-      filename: "index.js"
-    },
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader"
-          }
-        }
-      ]
-    },
-    resolve: {
-      extensions: ["*", ".js", ".vue", ".jsx", ".json"]
-    }
-  },
+  }
 ];
