@@ -5,69 +5,10 @@
 {% block title %} Usuarios {% endblock %}
 
 {% block content %}
-<div class="card" id="contenedor">
-     <div class="card-header">
-     <form>
-               <div class="form-group">
-                 <label for="">Nombre Completo</label>
-                 <input type="text"
-                        class="form-control"
-                        v-model="seleccion.nombre_completo"
-                        placeholder="Nombre Completo...">
-          </div>
-          <div class="form-group" style="width:180px;display:inline-block">
-                 <label for="">Nombre</label>
-                 <input type="text"
-                        class="form-control"
-                        v-model="seleccion.nombre"
-                        placeholder="Nombre...">
-          </div>
-          <div class="form-group" style="width:250px;display:inline-block">
-            <label for="">Password</label>
-            <input type="password"
-                   class="form-control"
-                   v-model="seleccion.password"
-                   placeholder="Password...">
-          </div>
-          <div class="form-group" style="width:250px;display:inline-block">
-            <label for="">Confirmar Password</label>
-            <input type="password"
-                  class="form-control"
-                   v-model="seleccion.password_conf"
-                   placeholder="Confirmar Password...">
-          </div>
-         <button
-                 type="submit"
-                 class="btn btn-success fa fa-send"
-                 v-if="comprobar_guardado && !actualizar"
-                 v-on:click="agregar"
-         > Agregar</button>
-         <button
-                 type="submit"
-                 class="btn btn-info fa fa-send"
-                 v-if="comprobar_guardado && actualizar"
-                 v-on:click="actualizar_usuario"
-         > Actualizar</button>
-         <button
-                 class="btn btn-warning fa fa-close"
-                 v-if="actualizar_usuario"
-                 v-on:click="cancelar"
-         > Cancelar</button>
-     </form>
-     </div>
-     <div class="card-body" style="height:410px">
-         <label>Usuarios.</label>
-         <input
-                 type="text"
-                 placeholder="Filtro Usuarios..."
-                 v-model="filtro"
-                 class="form-control">
-         <div style="height:320px;overflow:auto">
-            <Usuarios v-bind:lista="lista" v-bind:filtro="filtro_empleados" ></Usuarios>
-         </div>
-     </div>
+<div class="card" id="root">
+    
 </div>
 
- <script type="text/javascript"  src="{% static 'src/js/usuarios/lista_usuarios.js' %}?1.0.2" ></script>
+ <script type="text/javascript"  src="{% static 'src/js/usuarios/main.js' %}?1.0.2" ></script>
 
 {% endblock %}
