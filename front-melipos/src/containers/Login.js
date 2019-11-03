@@ -1,7 +1,8 @@
 //libreria
 import { connect } from 'react-redux';
 
-import Login from '../components/Login';
+import Login from '../components/Login/index';
+import { ADD_USER } from '../actions';
 
 const mapStateProps=()=>({
 

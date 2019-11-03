@@ -1,17 +1,28 @@
 //librerias
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 //estilos
 import './styles.css'
 
-/**
- * 
- * @param children:componente que se optiene en el props a renderizar.
- * @description :este componente contiene el template del sistema.
- * @requires :componente a renderizar.
- */
-const App=({children})=> {
+const App=({evRemoveUser})=> {
+  const salir = e =>{
+    e.preventDefault();
+    evRemoveUser();
+  }
   return (<div className="App">
       <label >page main <b>App.</b></label>
+      <button onClick={salir}>salir</button>
+      <Router>
+            <Switch>
+                <Route exact={true} path="/" component={()=><h1>Home</h1>} />
+                <Route exact={true} path="/login" component={()=><Redirect to="/" />} />
+            </Switch>
+        </Router>
     </div>);
 }
 

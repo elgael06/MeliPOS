@@ -6,6 +6,11 @@ import { IP } from "./ip"
  * @description: comprueba el acceso de usuario y retorna true o false crea una cache de sesion. 
  */
 export const inicio_sesion= async usuario =>{
-    let respuesta = await Axios.post(`${IP}usuarios/api/login`,usuario).catch(err=>console.log("Error en login..."))
-    return respuesta.data;
+    console.log(usuario)
+    //let respuesta = await Axios.post(`${IP}/usuarios/api/login`,usuario);
+    //return respuesta.data;
+    return {
+        ...usuario,
+        nombre:''
+    }
 }

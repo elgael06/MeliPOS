@@ -5,7 +5,7 @@ import reducers from '../reducers/index.reducers';
 
 
 const initialState = {
-    Usuario:null
+    Usuario: JSON.parse(localStorage.User || null)
 };
 
 export default createStore(reducers,initialState);

@@ -4,10 +4,7 @@ const Usuario = (
         id_usuario:0,
         usuario:'',
         nombre:''
-    },
-    actions={
-        type=''
-    } 
+    },actions
 )=>{
     switch(actions.type){
         case 'add_user':
@@ -15,14 +12,12 @@ const Usuario = (
             return actions.Usuario;
         case 'remove_user':
             localStorage.removeItem('User');
-            return {
-                id_usuario:0,
-                usuario:'',
-                nombre:''
-            }
+            return null
         case 'get_user':
-            return JSON.parse(localStorage.User) || null;
+            return JSON.parse(localStorage.User || null );
         default:
             return state;
     }
 }
+
+export default Usuario;
